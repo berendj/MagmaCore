@@ -1,11 +1,24 @@
 {
     "name": "berendj/magmacore",
     "description": "A simple PHP framework for building web applications",
+    "keywords": ["framework", "php", "magmacore"],
     "type": "library",
     "license": "MIT",
+    "readme": "",
+    "time": "",
+    "support": {
+        "issues": "https://github.com/berendj/MagmaCore/issues",
+        "source": "https://github.com/berendj/MagmaCore",
+        "wiki": "https://github.com/berendj/MagmaCore/wiki"
+    },
     "autoload": {
         "psr-4": {
-            "Berendj\\Magmacore\\": "src/"
+            "Magma\\": "src/Magma/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Magma\\Tests\\": "tests/"
         }
     },
     "authors": [
@@ -15,5 +28,13 @@
         }
     ],
     "minimum-stability": "alpha",
-    "require": {}
+    "require": {
+        "php": "7.4.33|^8.0",
+        "ext-mbstring": "*",
+        "ext-iconv": "*",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "ext-curl": "*",
+        "ext-simplexml": "*"
+    }
 }
