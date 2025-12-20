@@ -1,0 +1,19 @@
+{
+    "name": "berendj/magmacore",
+    "description": "A simple PHP framework for building web applications",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Berendj\\Magmacore\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "BJ Ruiterkamp",
+            "email": "bj.ruiterkamp@hccnet.nl"
+        }
+    ],
+    "minimum-stability": "alpha",
+    "require": {}
+}
