@@ -184,6 +184,45 @@ class Crud implements CrudInterface
         }
     }
 
+
+    public function rawQuery(string $rawQuery, ?array $conditions = [])
+    {
+        try {
+            $args = ['table' => $this->getSchema(), 'type' => 'raw', 'raw' => $rawQuery, 'conditions' => $conditions];
+            $query = $this->queryBuilder->buildQuery($args)->rawQuery();
+            $this->dataMapper->persist($query, $this->dataMapper->buildQueryParameters($conditions));
+            if ($this->dataMapper->numRows()) 
+            {
+/*
+                if (!in_array($resultType, ['fetch', 'fetch_all', 'column'])) {
+                    throw new Magma\Base\Exception\BaseInvalidArgumentException('Invalid 3rd argument. Your options are "fetch, fetch_all or column"');
+                }
+                switch ($resultType) {
+                    case 'column' :
+                        //$data = $this->dataMapper->column(); not implemented yet!
+                        break;
+                    case 'fetch' :
+                        $data = $this->dataMapper->result();
+                        break;
+                    case 'fetch_all' :
+                        $data = $this->dataMapper->results();
+                        break;
+                    default :
+                        throw new Magma\Base\Exception\BaseUnexpectedValueException('Please choose a return type for this method ie. "fetch, fetch_all or column."');
+                        break;
+                }
+                if ($data) {
+                    return $data;
+                }
+*/
+                }
+        } catch (Throwable $throwable) {
+            throw $throwable;
+        }
+
+    }
+
+
     /**
      * @inheritDoc
      *
@@ -236,9 +275,9 @@ class Crud implements CrudInterface
      * @param string $resultType
      * @return void
      */
-    public function rawQuery(string $sqlQuery, ?array $conditions = [], string $resultType = 'column')
+    /*public function rawQuery(string $sqlQuery, ?array $conditions = [], string $resultType = 'column')
     {
-        /*$args = ['table' => $this->getSchema(), 'type' => 'raw', 'conditions' => $conditions, 'raw' => $sqlQuery];
+        $args = ['table' => $this->getSchema(), 'type' => 'raw', 'conditions' => $conditions, 'raw' => $sqlQuery];
         $query = $this->queryBuilder->buildQuery($args)->rawQuery();
         $this->dataMapper->persist($query, $this->dataMapper->buildQueryParameters($conditions));
         if ($this->dataMapper->numRows()) {
@@ -262,9 +301,9 @@ class Crud implements CrudInterface
             if ($data) {
                 return $data;
             }
-        }*/
+        }
 
-    }
+    }*/
 
 
 }
