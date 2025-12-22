@@ -10,11 +10,11 @@ interface RouterInterface
      * Simple add a route to the routing table
      * 
      * @param string $route
-     * @param array $params
+     * @param array $params = []
      * 
      * @return void
      */
-    public function add(string $route, arrray $params) : void;
+    public function add(string $route, array $params = []) : void;
 
     /**
      * Dispatch route and create controller objects and execute the default method

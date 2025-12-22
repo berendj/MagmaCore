@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Magma\LiquidOrm\DataMapper;
 
-use Magma\DatabaseConnection\DatabaseConnectionInterface;
 use Magma\LiquidOrm\DataMapper\Exception\DataMapperInvalidArgumentException;
+use Magma\DatabaseConnection\DatabaseConnectionInterface;
 use PDOStatement;
 use Throwable;
 use PDO;
@@ -149,7 +149,7 @@ class DataMapper implements DataMapperInterface
     /**
      * @inheritDoc
      */
-    public function numRows()
+    public function numRows() : int
     {
         if ($this->statement)
         {
@@ -196,6 +196,36 @@ class DataMapper implements DataMapperInterface
                 }
             }
         } catch (Throwable $throwable) {
+            throw $throwable;
+        }
+    }
+
+    /**
+     * Returns the query condition merged with the query parameters
+     * 
+     * @param array $conditions
+     * @param array $parameters
+     * @return array
+     */
+    public function buildQueryParameters(array $conditions, array $parameters) : array
+    {
+        return (!empty($parameters) || (!empty($conditions)) ? array_merge($conditions, $parameters) : $parameters);
+    }
+
+
+    /**
+     * Persist queries to database
+     * 
+     * @param string $sqlQuery
+     * @param array $parameters
+     * @return mixed
+     * @throws Throwable
+     */
+    public function persist(string $sqlQuery, array $parameters)
+    {
+        try {
+            return $this->prepare($sqlQuery)->bindParameters($parameters)->execute();
+        } catch(Throwable $throwable) {
             throw $throwable;
         }
     }

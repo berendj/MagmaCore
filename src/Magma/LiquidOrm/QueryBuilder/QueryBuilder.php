@@ -33,7 +33,7 @@ class QueryBuilder implements QueryBuilderInterface
         'join' => []
     ];
 
-    protected const QUERY_TYPES = ['insert', 'select', 'update', 'delete', 'raw'];
+    protected const QUERY_TYPES = ['insert', 'select', 'update', 'delete', 'raw', 'search'];
 
     /**
      * Main constructor class
@@ -157,6 +157,37 @@ class QueryBuilder implements QueryBuilderInterface
         return false;
     }
 
+    public function searchQuery() : string
+    {
+        if ($this->isQueryTypeValid('search ')) {
+            if (is_array($this->key['selectors']) && $this->key['selectors'] != '') {
+                $this->sqlQuery = "SELECT * FROM {$this->key['table']} WHERE ";
+                if ($this->has('selectors')) {
+                    $values = [];
+                    foreach ($this->key['selectors'] as $selector) {
+                        $values[] = $selector . " LIKE " . "{$selector}";
+                    }
+                    if (count($this->key['selectors']) >= 1) {
+                        $this->sqlQuery .= implode(" OR ", $values);
+                    }
+                }
+                //$this->sqlQuery .= $this->orderByQuery();
+                //$this->sqlQuery .= $this->queryOffset();
+            }
+            return $this->sqlQuery;
+        }
+        return false;
+    }
+
+        public function rawQuery(): string
+    {
+        if ($this->isQueryTypeValid('raw')) {
+            $this->sqlQuery = $this->key['raw'];
+
+            return $this->sqlQuery;
+        }
+        return false;
+    }
 
     private function hasConditions()
     {
