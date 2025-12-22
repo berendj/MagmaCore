@@ -40,7 +40,7 @@ class EntityManagerFactory
      * @param string $tableSchemaID
      * @param array $options
      * @return EntityManagerInterface
-     * // throws BaseUnexpectedValueException
+     * @throws CrudException
      */
     public function create(string $crudString, string $tableSchema, string $tableSchemaID, array $options = []) : EntityManagerInterface
     {
