@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Magma\Base\Exception;
 
-use LogicException;
+use Exception;
 
-class BaseLogicException extends LogicException
+class BaseException extends Exception
 { }
