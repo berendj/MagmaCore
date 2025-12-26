@@ -4,8 +4,7 @@ declare(strict_types=1);
 
 namespace Magma\LiquidOrm\DataRepository;
 
-use Maga\liquidOrm\DataRepository\Exception\DataRepositoryInvalidArgumentException;
-//use Magma\Base\Exception\BaseInvalidArgumentException;
+use Magma\Base\Exception\BaseInvalidArgumentException;
 use Magma\LiquidOrm\DataRepository\DataRepositoryInterface;
 use Magma\LiquidOrm\EntityManager\EntityManagerInterface;
 use Magma\Utility\Paginator;
@@ -31,7 +30,7 @@ class DataRepository implements DataRepositoryInterface
     private function  isArray(array $conditions) : void
     {
         if (!is_array($conditions))
-            throw new DataRepositoryInvalidArgumentException('The argument supplied is not an array');
+            throw new BaseInvalidArgumentException('The argument supplied is not an array');
     }
 
     /**
@@ -43,7 +42,7 @@ class DataRepository implements DataRepositoryInterface
     private function isEmpty(int $id) : void
     {
         if (empty($id))
-            throw new DataRepositoryInvalidArgumentException('Argument should not be empty');
+            throw new BaseInvalidArgumentException('Argument should not be empty');
     }
 
     /**
@@ -100,7 +99,7 @@ class DataRepository implements DataRepositoryInterface
      *
      * @param array $conditions
      * @return array
-     * throws BaseInvalidArgumentException
+     * @throws BaseInvalidArgumentException
      */
     public function findOneBy(array $conditions) : array
     {
@@ -302,5 +301,6 @@ class DataRepository implements DataRepositoryInterface
             exit;
         }
     }
+
 
 }

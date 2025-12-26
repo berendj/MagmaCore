@@ -6,7 +6,7 @@ namespace Magma\LiquidOrm\EntityManager;
 
 interface CrudInterface
 {
- 
+
     /**
      * Returns the storage schema name as string
      * 
@@ -31,7 +31,7 @@ interface CrudInterface
     /**
      * Create method which inserts data within a storage table
      * 
-     * @param array $fields = []
+     * @param array $fields
      * @return bool
      */
     public function create(array $fields = []) : bool;
@@ -50,8 +50,8 @@ interface CrudInterface
     /**
      * Update method which update 1 or more rows of data with in the storage table
      * 
-     * @param array $fields = []
-     * @param string $primaryKey = []
+     * @param array $fields
+     * @param string $primaryKey
      * @return bool
      */
     public function update(array $fields = [], string $primaryKey) : bool;
@@ -59,7 +59,7 @@ interface CrudInterface
     /**
      * Delete method which will permanently delete a row from the storage table
      * 
-     * @param array $conditions = []
+     * @param array $conditions
      * @return bool
      */
     public function delete(array $conditions = []) : bool;
@@ -79,11 +79,34 @@ interface CrudInterface
      * 
      * @param string $rawQuery
      * @param array|null $conditions
-     * //param string $resultType
+     * @param string $resultType
      * @return mixed
      */
-//    public function rawQuery(string $rawQuery, ?array $conditions = [], string $resultType = 'column');
-    public function rawQuery(string $rawQuery, ?array $conditions = []);
+    public function rawQuery(string $rawQuery, ?array $conditions = [], string $resultType = 'column');
 
+    /**
+     * Returns a single table row as an object
+     * 
+     * @param array $selectors = []
+     * @param array $conditions = []
+     * @return null|Object
+     */
+    public function get(array $selectors = [], array $conditions = []) : ?Object;
+
+    /**
+     * @param string $type
+     * @param string $field
+     * @param array|null $conditions
+     * @return mixed
+     */
+    public function aggregate(string $type, ?string $field = 'id', array $conditions = []);
+
+    /**
+     * Returns the total number of records based on the method arguments
+     * @param array $conditions
+     * @param string|null $field
+     * @return int
+     */
+    public function countRecords(array $conditions = [], ?string $field = 'id') : int;
 
 }

@@ -138,7 +138,7 @@ class Session implements SessionInterface
         try{
             $this->storage->flush($key, $value);
         }catch(Throwable $throwable) {
-            throw $throwable;
+            throw new SessionException();
         }
     }
 

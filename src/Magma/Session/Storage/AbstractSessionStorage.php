@@ -24,12 +24,12 @@ abstract class AbstractSessionStorage implements SessionStorageInterface
         if ($options)
             $this->options = $options;
 
-        $this->iniSet();
         // Destroy any existing sessions started with session.auto_start
         if ($this->isSessionStarted()) {
             session_unset();
             session_destroy();
         }
+        $this->iniSet();
         $this->start();
     }
 
@@ -93,7 +93,7 @@ abstract class AbstractSessionStorage implements SessionStorageInterface
      */
     public function isSessionStarted()
     {
-        return php_sapi_name() !== 'cli' ? $this->getSessionID() !=='' : false;
+        return php_sapi_name() !== 'cli' ? $this->getSessionID() !== '' : false;
     }
 
     /**

@@ -34,7 +34,7 @@ class BaseView
         static $twig;
         if ($twig === null)
         {
-            $loader = new FilesystemLoader('template', TEMPLATE_PATH);
+            $loader = new FilesystemLoader('templates', TEMPLATE_PATH);
             $twig = new Environment($loader, array());
             $twig->addExtension(new DebugExtension());
             $twig->addExtension(new TwigExtension());

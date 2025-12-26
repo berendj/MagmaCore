@@ -106,5 +106,4 @@ interface DataRepositoryInterface
      */
     public function or404();
 
-
 }

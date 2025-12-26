@@ -1,5 +1,0 @@
-driver:
-  mysql:
-    dsn: mysql:host=localhost
-    username: berendj
-    password: xs2non
